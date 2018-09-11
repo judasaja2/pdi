@@ -25,7 +25,11 @@ center_y = rows/2;
 offset_center_x = 120;
 offset_center_y = 100;
 
-while 1
+continuar = 1;
+victoria = 0;
+colision = 0;
+
+while continuar
     
     img = snapshot(cam);
 
@@ -57,26 +61,21 @@ while 1
         if (current_coordinate_x > center_x + offset_center_x) && able == 1 && pos_x < limit_pos_x
             pos_x = pos_x + 1;
             able = 0;
-            disp('Derecha');
             cambio = 1;
         elseif (current_coordinate_x < center_x - offset_center_x) && able == 1 && pos_x > 0
             pos_x = pos_x - 1;
             able = 0;
-            disp('Izquierda');
             cambio = 1;
         elseif (current_coordinate_y > center_y + offset_center_y) && able == 1 && pos_y < limit_pos_y
             pos_y = pos_y + 1;
             able = 0;
-            disp('Abajo');
             cambio = 1;
         elseif (current_coordinate_y < center_y - offset_center_y) && able == 1 && pos_y > 0
             pos_y = pos_y - 1;
             able = 0;
-            disp('Arriba');
             cambio = 1;
         elseif current_coordinate_x < center_x + offset_center_x && current_coordinate_x > center_x - offset_center_x && current_coordinate_y < center_y + offset_center_y && current_coordinate_y > center_y - offset_center_y
             able = 1;
-            disp('Centro');
         end
         
         if cambio == 1
@@ -101,6 +100,14 @@ while 1
         
         subplot(1,2,2);
         imshow(object_and_center);
+    end
+    
+    if victoria == 1
+        continuar = 0;
+        disp('Has ganado');
+    elseif colision == 1
+        continuar = 0;
+        disp('Has perdido');
     end
     
 end
